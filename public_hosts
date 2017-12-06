@@ -1,0 +1,28 @@
+### This inventory file is only used for testing individual playbooks, a vagrant inventory is used when 'vagrant up' is run
+
+[controller]
+controller01  ansible_host=134.213.139.17
+controller02  ansible_host=134.213.133.44
+controller03  ansible_host=5.79.31.15
+
+[compute]
+compute01 ansible_host=134.213.139.19
+compute02 ansible_host=134.213.222.12
+compute03 ansible_host=134.213.133.54
+
+[ntp-server]
+controller01
+
+[ntp-client]
+controller02
+controller03
+compute01
+compute02
+compute03
+
+[general:children]
+controller
+compute
+
+[general:vars]
+ansible_python_interpreter=/usr/bin/python3

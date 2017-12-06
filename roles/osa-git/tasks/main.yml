@@ -1,0 +1,20 @@
+---
+
+- name: Install  Packages
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+  when: ansible_os_family == "Debian"
+  tags:
+    - packages
+    - git
+    - ubuntu
+
+- name: Checkout OpenStack-Ansible Git
+  git:
+    repo: "{{ osa_repo }}"
+    dest: "{{ osa_destination }}"
+    version: "{{ osa_version }}"
+  tags:
+    - git
+    - osa

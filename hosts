@@ -1,0 +1,26 @@
+### This inventory file is only used for testing individual playbooks, a vagrant inventory is used when 'vagrant up' is run
+
+[controller]
+controller01  ansible_host=172.29.236.110 br_mgmt_ip=172.29.236.110 br_vxlan_ip=172.29.240.110 br_storage_ip=172.29.244.110
+controller02  ansible_host=172.29.236.111 br_mgmt_ip=172.29.236.111 br_vxlan_ip=172.29.240.111 br_storage_ip=172.29.244.111
+controller03  ansible_host=172.29.236.112 br_mgmt_ip=172.29.236.112 br_vxlan_ip=172.29.240.112 br_storage_ip=172.29.244.112
+
+[compute]
+compute01 ansible_host=172.29.236.113 br_mgmt_ip=172.29.236.113 br_vxlan_ip=172.29.240.113 br_storage_ip=172.29.244.113
+compute02 ansible_host=172.29.236.114 br_mgmt_ip=172.29.236.114 br_vxlan_ip=172.29.240.114 br_storage_ip=172.29.244.114
+
+[ntp-server]
+controller01
+
+[ntp-client]
+controller02
+controller03
+compute01
+compute02
+
+[general:children]
+controller
+compute
+
+[general:vars]
+ansible_python_interpreter=/usr/bin/python3

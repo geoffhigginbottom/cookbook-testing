@@ -1,0 +1,6 @@
+---
+- hosts: general:!controller01
+
+  roles:
+    - distribute-key
+  

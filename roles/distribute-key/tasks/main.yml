@@ -1,0 +1,7 @@
+---
+
+# Copies the public key which was generated on comtroller-01 to all other hosts for use by openstack-ansible
+
+- name: Add Authorised Key Root User
+  authorized_key: user=root key="{{ lookup('file', 'files/id_rsa.pub') }}"
+  tags: auth_key

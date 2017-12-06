@@ -1,0 +1,35 @@
+---
+
+- name: Update apt sources
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  register: apt_update
+  until: apt_update|success
+  retries: 5
+  delay: 2
+  when: ansible_os_family == "Debian"
+  tags: update
+
+- name: Install Disk Tools
+  package: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - parted
+    - xfsprogs
+  tags: 
+    - disk-tools
+
+- parted:
+    device: /dev/sdc
+    number: 1
+    state: present
+
+- name: Create filesystem
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sdc1 
+    opts: "-i size=1024"
+  tags:
+    - filesystem

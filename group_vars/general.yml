@@ -1,0 +1,43 @@
+---
+
+osa_repo: 'https://github.com/openstack/openstack-ansible.git'
+osa_version: 15.1.12
+osa_destination: /opt/openstack-ansible
+
+# Neutron’s VLAN bridge (br-vlan)
+br_vlan_bridge_ports: enp0s8
+
+# Container bridge (br-mgmt)
+br_mgmt_bridge_ports: enp0s9
+br_mgmt_mask: 255.255.255.0
+
+#Neutron’s VXLAN bridge (br-vxlan)
+br_vxlan_bridge_ports: enp0s10
+br_vxlan_mask: 255.255.255.0
+
+# Storage Bridge (br-storage)
+br_storage_bridge_ports: enp0s16
+br_storage_mask: 255.255.255.0
+
+
+# ### Hosts File Settings ###
+# domain_name: openstack-newton.local
+
+# controller1_mgmt_ip: 10.0.0.11
+# controller1_hostname: controller1
+# controller1_api_ip: 203.0.113.11
+# controller1_api_hostname: controller1-api
+
+# compute1_mgmt_ip: 10.0.0.31
+# compute1_hostname: compute1
+# compute1_api_ip: 203.0.113.31
+# compute1_api_hostname: compute1-api
+
+# block1_mgmt_ip: 10.0.0.41
+# block1_hostname: block1
+
+# object1_mgmt_ip: 10.0.0.51
+# object1_hostname: object1
+
+# object2_mgmt_ip: 10.0.0.52
+# object2_hostname: object2

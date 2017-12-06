@@ -1,0 +1,6 @@
+---
+
+- name: Fetch Root Public Key
+  fetch: src=/root/.ssh/id_rsa.pub dest=files/ flat=yes fail_on_missing=yes validate_checksum=yes
+  tags: fetch_key
+ 

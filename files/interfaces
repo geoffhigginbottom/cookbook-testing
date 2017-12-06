@@ -1,0 +1,42 @@
+### Ansible managed file ###
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Source interfaces
+# Please check /etc/network/interfaces.d before changing this file
+# as interfaces may have been defined in /etc/network/interfaces.d
+# See LP: #1262951
+source /etc/network/interfaces.d/*.cfg
+
+
+# Neutron’s VLAN bridge (br-vlan)
+auto br-vlan
+iface br-vlan inet manual
+bridge_ports {{ br_vlan_bridge_ports }}
+bridge_stp off
+
+# Container bridge (br-mgmt)
+auto br-mgmt
+iface br-mgmt inet static
+address {{ br_mgmt_ip }}
+netmask {{ br_mgmt_mask }}
+bridge_ports {{ br_mgmt_bridge_ports }}
+bridge_stp off
+
+# Neutron’s VXLAN bridge (br-vxlan)
+auto br-vxlan
+iface br-vxlan inet static
+address {{ br_vxlan_ip }}
+netmask {{ br_vxlan_mask }}
+bridge_ports {{ br_vxlan_bridge_ports }}
+bridge_stp off
+
+# Storage Bridge (br-storage)
+auto br-storage
+iface br-storage inet static
+address {{ br_storage_ip }}
+netmask {{ br_storage_mask }}
+bridge_ports {{ br_storage_bridge_ports }}
+bridge_stp off
