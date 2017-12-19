@@ -70,39 +70,39 @@ Vagrant.configure("2") do |config|
         end # box.vm virtualbox
       
         if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
-          vbox.customize ["modifyvm", :id, "--groups", "/cookbookv4"]
           vbox.customize ["modifyvm", :id, "--memory", 4096]
           vbox.customize ["modifyvm", :id, "--cpus", 2]
-        end # if prefix == controller01
+        end # if prefix == controllernn
 
         if prefix == "compute01" or prefix == "compute02"
-          vbox.customize ["modifyvm", :id, "--groups", "/cookbookv4"]
           vbox.customize ["modifyvm", :id, "--memory", 6144]
           vbox.customize ["modifyvm", :id, "--cpus", 2]
-        end # if prefix == controller01
+        end # if prefix == computenn
 
-        if prefix == "compute02" # only run once the compute02 VM has been brought on line
+        if prefix == "lb02" # only run once the compute02 VM has been brought on line
           config.vm.provision "ansible" do |ansible|
             # Disable default limit to connect to all the machines
             ansible.limit = "all"
             ansible.playbook = "vagrant_site.yml"
             ansible.groups = {
               "ntp-server" => ["controller01"],
-              "ntp-client" => ["controller02", "controller03", "compute01", "compute02"],
-              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02"]
+              "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "lb01", "lb02"],
+              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01", "lb02"]
             }
             ansible.host_vars = {
               "controller01" => {"br_mgmt_ip" => "172.29.236.110", "br_vxlan_ip" => "172.29.240.110", "br_storage_ip" => "172.29.244.110"},
               "controller02" => {"br_mgmt_ip" => "172.29.236.111", "br_vxlan_ip" => "172.29.240.111", "br_storage_ip" => "172.29.244.111"},
               "controller03" => {"br_mgmt_ip" => "172.29.236.112", "br_vxlan_ip" => "172.29.240.112", "br_storage_ip" => "172.29.244.112"},
               "compute01" => {"br_mgmt_ip" => "172.29.236.113", "br_vxlan_ip" => "172.29.240.113", "br_storage_ip" => "172.29.244.113"},
-              "compute02" => {"br_mgmt_ip" => "172.29.236.114", "br_vxlan_ip" => "172.29.240.114", "br_storage_ip" => "172.29.244.114"}
+              "compute02" => {"br_mgmt_ip" => "172.29.236.114", "br_vxlan_ip" => "172.29.240.114", "br_storage_ip" => "172.29.244.114"},
+              "lb01" => {"br_mgmt_ip" => "172.29.236.100"},
+              "lb02" => {"br_mgmt_ip" => "172.29.236.101"}
             }
             # ansible.extra_vars = {
             #   ansible_python_interpreter: "/usr/bin/python3"
             # }
           end # do ansible
-        end # if prefix == compute02
+        end # if prefix == lb02
       end # config.vm.define 
     end # count.times
   end # nodes.each
