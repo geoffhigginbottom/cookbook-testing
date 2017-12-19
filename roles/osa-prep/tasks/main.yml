@@ -75,6 +75,7 @@
     src: files/interfaces
     dest: /etc/network/interfaces
     backup: yes
+  hosts: all !lb
   when: ansible_os_family == "Debian"
   tags:
     - networking
