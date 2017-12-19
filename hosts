@@ -9,6 +9,10 @@ controller03  ansible_host=172.29.236.112 br_mgmt_ip=172.29.236.112 br_vxlan_ip=
 compute01 ansible_host=172.29.236.113 br_mgmt_ip=172.29.236.113 br_vxlan_ip=172.29.240.113 br_storage_ip=172.29.244.113
 compute02 ansible_host=172.29.236.114 br_mgmt_ip=172.29.236.114 br_vxlan_ip=172.29.240.114 br_storage_ip=172.29.244.114
 
+[lb]
+lb01 ansible_host=172.29.236.100
+lb02 ansible_host=172.29.236.101
+
 [ntp-server]
 controller01
 
@@ -17,10 +21,13 @@ controller02
 controller03
 compute01
 compute02
+lb01
+lb02
 
 [general:children]
 controller
 compute
+lb
 
 [general:vars]
 ansible_python_interpreter=/usr/bin/python3

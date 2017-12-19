@@ -98,9 +98,9 @@ Vagrant.configure("2") do |config|
               "lb01" => {"br_mgmt_ip" => "172.29.236.100"},
               "lb02" => {"br_mgmt_ip" => "172.29.236.101"}
             }
-            # ansible.extra_vars = {
-            #   ansible_python_interpreter: "/usr/bin/python3"
-            # }
+            ansible.extra_vars = {
+              ansible_python_interpreter: "/usr/bin/python3"
+            }
           end # do ansible
         end # if prefix == lb02
       end # config.vm.define 
