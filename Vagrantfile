@@ -66,9 +66,7 @@ Vagrant.configure("2") do |config|
           #   vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
           # end # unless
           # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
-
-        end # box.vm virtualbox
-      
+     
           if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
             vbox.customize ["modifyvm", :id, "--memory", 4096]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
@@ -78,6 +76,8 @@ Vagrant.configure("2") do |config|
             vbox.customize ["modifyvm", :id, "--memory", 6144]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
           end # if prefix == computenn
+      
+        end # box.vm virtualbox
 
         if prefix == "lb02" # only run once the compute02 VM has been brought on line
           config.vm.provision "ansible" do |ansible|
