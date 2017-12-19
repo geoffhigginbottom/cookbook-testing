@@ -3,25 +3,27 @@
 # We set the last octet in IPV4 address here
 nodes = {
  'controller01' => [1, 110],
- # 'controller02' => [1, 111],
- # 'controller03' => [1, 112],
+ 'controller02' => [1, 111],
+ 'controller03' => [1, 112],
  'compute01' => [1, 113],
- # 'compute02' => [1, 114]
+ 'compute02' => [1, 114],
+ 'lb01' => [1, 100],
+ 'lb02' => [1, 101],
 }
 
 # Create the folder structure now so we can also create the extra volumes.
 # Whilst Vagrant will create the first folder based on the 'groups' setting below
 # using this path to store the extra volumes causes an initial failure if the 
 # following two folders do not exist when vagrant.configure runs 
-dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4"
-unless File.directory?( dir )
-    Dir.mkdir dir
-end # unless
+# dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4"
+# unless File.directory?( dir )
+#     Dir.mkdir dir
+# end # unless
 
-dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4/additional-disks"
-unless File.directory?( dir )
-    Dir.mkdir dir
-end # unless
+# dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4/additional-disks"
+# unless File.directory?( dir )
+#     Dir.mkdir dir
+# end # unless
 
 Vagrant.configure("2") do |config| 
   config.vm.box = "ubuntu/xenial64"
@@ -41,8 +43,8 @@ Vagrant.configure("2") do |config|
           vbox.linked_clone = true
           vbox.name = "#{hostname}"
           vbox.customize ["modifyvm", :id, "--groups", "/cookbookv4"]
-          vbox.customize ["modifyvm", :id, "--memory", 4096]
-          vbox.customize ["modifyvm", :id, "--cpus", 2]
+          vbox.customize ["modifyvm", :id, "--memory", 1024]
+          vbox.customize ["modifyvm", :id, "--cpus", 1]
           vbox.customize ["modifyvm", :id, "--pae", "on"]
           vbox.customize ["modifyvm", :id, "--paravirtprovider", "kvm"]
           vbox.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
@@ -55,18 +57,30 @@ Vagrant.configure("2") do |config|
           vbox.customize ["modifyvm", :id, "--nicpromisc4", "allow-all"]
           vbox.customize ["modifyvm", :id, "--nicpromisc5", "allow-all"]
 
-          dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4/additional-disks"
-          unless File.directory?( dir )
-              Dir.mkdir dir
-          end # unless
-          file_to_disk = "#{dir}/#{hostname}-sdb.vmdk"
-          unless File.exists?( file_to_disk )
-            vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
-          end # unless
-          vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+          # dir = "#{ENV['HOME']}/VirtualBox VMs/cookbookv4/additional-disks"
+          # unless File.directory?( dir )
+          #     Dir.mkdir dir
+          # end # unless
+          # file_to_disk = "#{dir}/#{hostname}-sdb.vmdk"
+          # unless File.exists?( file_to_disk )
+          #   vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
+          # end # unless
+          # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
 
         end # box.vm virtualbox
       
+        if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
+          vbox.customize ["modifyvm", :id, "--groups", "/cookbookv4"]
+          vbox.customize ["modifyvm", :id, "--memory", 4096]
+          vbox.customize ["modifyvm", :id, "--cpus", 2]
+        end # if prefix == controller01
+
+        if prefix == "compute01" or prefix == "compute02"
+          vbox.customize ["modifyvm", :id, "--groups", "/cookbookv4"]
+          vbox.customize ["modifyvm", :id, "--memory", 6144]
+          vbox.customize ["modifyvm", :id, "--cpus", 2]
+        end # if prefix == controller01
+
         if prefix == "compute02" # only run once the compute02 VM has been brought on line
           config.vm.provision "ansible" do |ansible|
             # Disable default limit to connect to all the machines
