@@ -135,6 +135,17 @@
     - common
     - test
 
+
+- name: Reboot LBs?
+  debug:
+    msg: "LB Reboot required"
+  when: (inventory_hostname | search("lb")) and (stat_result.stat.exists == True) 
+  notify: restart
+  tags:
+    - upgrade
+    - common
+    - test
+
 # - name: Reboot Block?
 #   debug:
 #     msg: "Block Reboot required"
