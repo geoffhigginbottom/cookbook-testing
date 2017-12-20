@@ -79,9 +79,9 @@ shared-infra_hosts:
   controller01:
     ip: 172.29.236.110
   controller02:
-   ip: 172.29.236.111
+    ip: 172.29.236.111
   controller03:
-   ip: 172.29.236.112
+    ip: 172.29.236.112
 
 # OpenStack Compute infrastructure parts
 os-infra_hosts:
@@ -156,7 +156,7 @@ network_hosts:
 
 # User defined Repository Hosts, this is an optional group
 repo-infra_hosts:
-   controller01:
+  controller01:
     ip: 172.29.236.110
   controller02:
     ip: 172.29.236.111
@@ -164,7 +164,7 @@ repo-infra_hosts:
     ip: 172.29.236.112
 
 # haproxy_hosts:
-   lb1:
-     ip: 172.29.236.100
+  lb1:
+    ip: 172.29.236.100
    # lb2:
    #   ip: 172.29.236.101
