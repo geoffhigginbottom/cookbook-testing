@@ -7,8 +7,8 @@ nodes = {
  'controller03' => [1, 112],
  'compute01' => [1, 113],
  'compute02' => [1, 114],
+ # 'lb02' => [1, 101],
  'lb01' => [1, 100],
- #'lb02' => [1, 101],
 }
 
 # Create the folder structure now so we can also create the extra volumes.
@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
       
         end # box.vm virtualbox
 
-        if prefix == "lb02" # only run once the compute02 VM has been brought on line
+        if prefix == "lb01" # only run once the last VM has been brought on line
           config.vm.provision "ansible" do |ansible|
             # Disable default limit to connect to all the machines
             ansible.limit = "all"
@@ -102,7 +102,7 @@ Vagrant.configure("2") do |config|
               ansible_python_interpreter: "/usr/bin/python3"
             }
           end # do ansible
-        end # if prefix == lb02
+        end # if prefix == lb01
       end # config.vm.define 
     end # count.times
   end # nodes.each
