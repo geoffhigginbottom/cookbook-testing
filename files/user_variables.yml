@@ -30,7 +30,7 @@ debug: false
 # Note that "swift" is automatically set as the default back-end if there
 # are any swift hosts in the environment. Use this setting to override
 # this automation if you wish for a different default back-end.
-# glance_default_store: file
+glance_default_store: swift
 
 ## Ceph pool name for Glance to use
 # glance_rbd_store_pool: images

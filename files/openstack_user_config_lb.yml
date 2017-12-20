@@ -135,10 +135,17 @@ compute_hosts:
   compute02:
     ip: 172.29.236.114
 
+# Cinder Hosts
+storage_hosts:
+  controller01:
+    ip: 172.29.236.110
+
+# Loging Host
 log_hosts:
   controller01:
     ip: 172.29.236.110
 
+# Neutron Hosts
 network_hosts:
   controller01:
     ip: 172.29.236.110
@@ -159,5 +166,5 @@ repo-infra_hosts:
 # haproxy_hosts:
    lb1:
      ip: 172.29.236.100
-   lb2:
-     ip: 172.29.236.101
+   # lb2:
+   #   ip: 172.29.236.101

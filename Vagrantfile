@@ -8,7 +8,7 @@ nodes = {
  'compute01' => [1, 113],
  'compute02' => [1, 114],
  'lb01' => [1, 100],
- 'lb02' => [1, 101],
+ #'lb02' => [1, 101],
 }
 
 # Create the folder structure now so we can also create the extra volumes.
