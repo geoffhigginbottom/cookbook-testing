@@ -94,10 +94,10 @@
 ## generates the reboot-required.pkgs
 ## used just for testing reboot code which follows
 ## comment out once working
-- name: Generate reboot file
-  copy:
-    src: files/reboot-required.pkgs
-    dest: /var/run/reboot-required.pkgs
+# - name: Generate reboot file
+#   copy:
+#     src: files/reboot-required.pkgs
+#     dest: /var/run/reboot-required.pkgs
 
 - name: Is Reboot Required
   stat: 
