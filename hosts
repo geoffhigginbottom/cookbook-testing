@@ -10,8 +10,8 @@ compute01 ansible_host=172.29.236.113 br_mgmt_ip=172.29.236.113 br_vxlan_ip=172.
 compute02 ansible_host=172.29.236.114 br_mgmt_ip=172.29.236.114 br_vxlan_ip=172.29.240.114 br_storage_ip=172.29.244.114
 
 [lb]
-lb01 ansible_host=172.29.236.100
-lb02 ansible_host=172.29.236.101
+lb01 ansible_host=172.29.236.100 br_mgmt_ip=172.29.236.100
+lb02 ansible_host=172.29.236.101 br_mgmt_ip=172.29.236.101
 
 [ntp-server]
 controller01
