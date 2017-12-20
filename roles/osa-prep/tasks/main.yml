@@ -75,8 +75,7 @@
     src: files/interfaces
     dest: /etc/network/interfaces
     backup: yes
-  hosts: all !lb:children
-  when: ansible_os_family == "Debian"
+  when: (ansible_os_family == "Debian") and (ansible_hostname not "lb01")
   tags:
     - networking
     - ubuntu
