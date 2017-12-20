@@ -156,7 +156,7 @@ glance_swift_store_user: 'service:glance'
 
 ## HAProxy
 # Uncomment this to disable keepalived installation (cf. documentation)
-# haproxy_use_keepalived: False
+haproxy_use_keepalived: False
 #
 # HAProxy Keepalived configuration (cf. documentation)
 # Make sure that this is set correctly according to the CIDR used for your
