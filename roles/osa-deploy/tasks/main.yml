@@ -53,7 +53,7 @@
     - test
 
 - name: Generate User Secrets
-  shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml args1
+  shell: "python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml" args1
   args:
     chdir: /opt/openstack-ansible/scripts
   when: user_secrets.stdout_lines != " "
