@@ -25,6 +25,7 @@
   check_mode: no
   register: rsync_result
   changed_when: rsync_result.stdout != ''
+  creates: /etc/openstack_deploy
   tags: 
     - rsync
 
