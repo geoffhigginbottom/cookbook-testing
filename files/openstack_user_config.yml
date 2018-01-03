@@ -1,63 +1,22 @@
 ---
-# Copyright 2014, Rackspace US, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# Overview
-# ========
-#
-# This file contains the configuration for OpenStack Ansible Deployment
-# (OSA) core services. Optional service configuration resides in the
-# conf.d directory.
-#
-# You can customize the options in this file and copy it to
-# /etc/openstack_deploy/openstack_user_config.yml or create a new
-# file containing only necessary options for your environment
-# before deployment.
-#
-# OSA implements PyYAML to parse YAML files and therefore supports structure
-# and formatting options that augment traditional YAML. For example, aliases
-# or references. For more information on PyYAML, see the documentation at
-#
-# http://pyyaml.org/wiki/PyYAMLDocumentation
-#
-# Configuration reference
-# =======================
-
 cidr_networks:
   container: 172.29.236.0/24
   tunnel: 172.29.240.0/24
   storage: 172.29.244.0/24
 
-# --------
-
 used_ips:
-  - "172.29.236.20"
-  - "172.29.240.20"
-  - "172.29.244.20"
-  - "172.29.236.101,172.29.236.117"
-  - "172.29.240.101,172.29.240.117"
-  - "172.29.244.101,172.29.244.117"
-  - "172.29.248.101,172.29.248.117"
-
-# --------
+  - 172.29.236.1
+  - 172.29.236.100,172.29.236.200
+  - 172.29.240.100,172.29.240.200
+  - 172.29.244.100,172.29.244.200
+  - 172.29.248.100,172.29.248.200
 
 global_overrides:
   internal_lb_vip_address: 172.29.236.117
   external_lb_vip_address: 192.168.100.117
-  lb_name: logging
   tunnel_bridge: "br-vxlan"
   management_bridge: "br-mgmt"
+  
   provider_networks:
     - network:
         group_binds:
@@ -72,10 +31,25 @@ global_overrides:
         is_ssh_address: true
     - network:
         group_binds:
+          - glance_api
+          - cinder_api
+          - cinder_volume
+          - nova_compute
+          # Uncomment the next line if using swift with a storage network.
+          # - swift_proxy
+        type: "raw"
+        container_bridge: "br-storage"
+        container_type: "veth"
+        container_interface: "eth2"
+        container_mtu: "9000"
+        ip_from_q: "storage"
+    - network:
+        group_binds:
           - neutron_linuxbridge_agent
         container_bridge: "br-vxlan"
         container_type: "veth"
         container_interface: "eth10"
+        container_mtu: "9000"
         ip_from_q: "tunnel"
         type: "vxlan"
         range: "1:1000"
@@ -87,7 +61,7 @@ global_overrides:
         container_type: "veth"
         container_interface: "eth11"
         type: "vlan"
-        range: "1:1"
+        range: "101:200,301:400"
         net_name: "vlan"
     - network:
         group_binds:
@@ -95,146 +69,102 @@ global_overrides:
         container_bridge: "br-vlan"
         container_type: "veth"
         container_interface: "eth12"
-        host_bind_override: "eth2"
+        host_bind_override: "eth12"
         type: "flat"
         net_name: "flat"
 
-# --------
 
+# Shared infrastructure parts
 shared-infra_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
-# --------
-
-repo-infra_hosts:
-  controller01:
-    ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
-
-# --------
-
+# OpenStack Compute infrastructure parts
 os-infra_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
-# --------
-
-identity_hosts:
+# Shared infrastructure parts
+shared-infra_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
-# --------
-
-network_hosts:
+# OpenStack Compute infrastructure parts
+os-infra_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
-# --------
-
-compute_hosts:
-  compute01:
-    ip: 172.29.236.113
-  # compute02:
-  #   ip: 172.29.236.114
-
-# --------
-
+# OpenStack Storage infrastructure parts
 storage-infra_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller02:
-  #   ip: 172.29.236.111
-  # controller03:
-  #   ip: 172.29.236.112
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
-# --------
+# Keystone Identity infrastructure parts
+identity_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
 
+# Compute Hosts
+compute_hosts:
+  compute01:
+    ip: 172.29.236.113
+  compute02:
+    ip: 172.29.236.114
+
+# Cinder Hosts
 storage_hosts:
   controller01:
     ip: 172.29.236.110
-  # controller03:
-  #   ip: 172.29.236.112
 
-# --------
-
+# Loging Host
 log_hosts:
   controller01:
     ip: 172.29.236.110
 
-# --------
-#
-# Level: haproxy_hosts (optional)
-# List of target hosts on which to deploy HAProxy. Recommend at least one
-# target host for this service if hardware load balancers are not being
-# used.
-#
-#   Level: <value> (required, string)
-#   Hostname of a target host.
-#
-#     Option: ip (required, string)
-#     IP address of this target host, typically the IP address assigned to
-#     the management bridge.
-#
-#
-# Example:
-#
-# Define a virtual load balancer (HAProxy):
-#
-# While HAProxy can be used as a virtual load balancer, it is recommended to use
-# a physical load balancer in a production environment.
-#
+# Neutron Hosts
+network_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
+# User defined Repository Hosts, this is an optional group
+repo-infra_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
 # haproxy_hosts:
-#   lb1:
-#     ip: 172.29.236.100
-#   lb2:
-#     ip: 172.29.236.101
-#
-# In case of the above scenario(multiple hosts),HAProxy can be deployed in a
-# highly-available manner by installing keepalived.
-#
-# To make keepalived work, edit at least the following variables
-# in ``user_variables.yml``:
-#  haproxy_keepalived_external_vip_cidr: 192.168.0.4/25
-#  haproxy_keepalived_internal_vip_cidr: 172.29.236.54/16
-#  haproxy_keepalived_external_interface: br-flat
-#  haproxy_keepalived_internal_interface: br-mgmt
-#
-# To always deploy (or upgrade to) the latest stable version of keepalived.
-# Edit the ``/etc/openstack_deploy/user_variables.yml``:
-#   keepalived_package_state: latest
-#
-# The HAProxy playbook reads the ``vars/configs/keepalived_haproxy.yml``
-# variable file and provides content to the keepalived role for
-# keepalived master and backup nodes.
-#
-# Keepalived pings a public IP address to check its status. The default
-# address is ``193.0.14.129``. To change this default,
-# set the ``keepalived_ping_address`` variable in the
-# ``user_variables.yml`` file.
-#
-# You can define additional variables to adapt keepalived to your
-# deployment. Refer to the ``user_variables.yml`` file for
-# more information. Optionally, you can use your own variable file.
-# For example:
-#   haproxy_keepalived_vars_file: /path/to/myvariablefile.yml
-#
+  lb1:
+    ip: 172.29.236.100
+   # lb2:
+   #   ip: 172.29.236.101

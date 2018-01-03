@@ -30,7 +30,7 @@
 
 - name: Create openstack_user_config.yml from template
   template:
-    src: /files/openstack_user_config.yml
+    src: files/openstack_user_config.yml
     dest: /etc/openstack_deploy/openstack_user_config.yml
     backup: yes
   tags:
