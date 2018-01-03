@@ -65,4 +65,11 @@
     backup: yes
   tags:
     - user_variables
-    - test
+
+- name: Run setup-hosts.yml
+  shell: ansible-playbook setup-hosts.yml
+  args:
+    chdir: /opt/openstack-ansible/playbooks
+    creates: /var/log/lxc
+  tags: 
+    - setup_hosts
