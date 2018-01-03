@@ -20,12 +20,20 @@
   tags: 
     - rsync
 
+# Check to see if the user_secrets has already been populated
+- name: Check user_secrets
+  shell: "grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | awk '{print $2}'"
+  register: user_secrets
+  no_log: true
+  tags: 
+    - user_secrets 
+
 - name: Copy openstack_deploy to etc
   shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy /etc/
   check_mode: no
   register: rsync_result
   changed_when: rsync_result.stdout != ''
-  creates: /etc/openstack_deploy/user_secrets.yml
+  when: user_secrets.stdout == ""
   tags: 
     - rsync
 
