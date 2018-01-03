@@ -44,8 +44,8 @@
     - user_secrets
     - test
 
-- name: Generate User Secrets
-  shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml args1
-    chdir: /opt/openstack-ansible/scripts
-  when: user_secrets.presence.changed
+# - name: Generate User Secrets
+#   shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml args1
+#     chdir: /opt/openstack-ansible/scripts
+#   when: user_secrets.presence.changed
 
