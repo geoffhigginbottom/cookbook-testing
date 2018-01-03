@@ -40,9 +40,16 @@
 - name: Check user_secrets
   shell: "grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | awk '{print $2}'"
   register: user_secrets
+  no_log: true
   tags: 
     - user_secrets
     - test
+
+- debug:
+    var: user_secrets
+    verbosity: 2
+
+
 
 # - name: Generate User Secrets
 #   shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml args1
