@@ -23,8 +23,9 @@
   when: ansible_check_mode
 
 - name: Copy openstack_deploy to etc
-  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy/ /etc/
+  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy /etc/
   # always run
   check_mode: no
   register: rsync_result
   changed_when: rsync_result.stdout != ''
+  tags: copy
