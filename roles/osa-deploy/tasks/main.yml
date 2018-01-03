@@ -9,9 +9,22 @@
   #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdb
   tags: bootstrap-ansible
 
+# - name: Copy openstack_deploy to etc
+#   copy:
+#     src: /opt/openstack-ansible/etc/openstack_deploy
+#     dest: /etc/
+#     remote_src: yes
+#   tags: copy
+
+
+- name: Set Fact
+  set_fact:
+    rsync_dry_run: "--dry-run"
+  when: ansible_check_mode
+
 - name: Copy openstack_deploy to etc
-  copy:
-    src: /opt/openstack-ansible/etc/openstack_deploy
-    dest: /etc/
-    remote_src: yes
-  tags: copy
+  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy/ /etc/
+  # always run
+  check_mode: no
+  register: rsync_result
+  changed_when: rsync_result.stdout != ''
