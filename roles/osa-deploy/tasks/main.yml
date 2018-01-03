@@ -43,14 +43,12 @@
   no_log: true
   tags: 
     - user_secrets
-    - test
 
 - debug:
     var: user_secrets
     verbosity: 2
   tags: 
     - user_secrets
-    - test
 
 - name: Generate User Secrets
   shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml
@@ -59,4 +57,12 @@
   when: user_secrets.stdout == ""
   tags: 
     - user_secrets
+
+- name: Create user_variables.yml from template
+  template:
+    src: files/user_variables.yml
+    dest: /etc/openstack_deploy/user_variables.yml
+    backup: yes
+  tags:
+    - user_variables
     - test
