@@ -1,7 +1,7 @@
 ---
 
 osa_repo: 'https://github.com/openstack/openstack-ansible.git'
-osa_version: 15.1.12
+osa_version: 15.1.13
 osa_destination: /opt/openstack-ansible
 
 # Neutron’s VLAN bridge (br-vlan)

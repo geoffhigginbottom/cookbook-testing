@@ -10,5 +10,4 @@
 - import_playbook: distribute-key.yml
 - import_playbook: osa-prep.yml
 - import_playbook: osa-git.yml
-# - import_playbook: cloud-archive.yml
 ### base build end ###
