@@ -7,25 +7,45 @@
     creates: /opt/openstack-ansible
   # environment: 
   #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdb
-  tags: bootstrap-ansible
+  tags: 
+    - bootstrap-ansible
 
-# - name: Copy openstack_deploy to etc
-#   copy:
-#     src: /opt/openstack-ansible/etc/openstack_deploy
-#     dest: /etc/
-#     remote_src: yes
-#   tags: copy
-
+# Copy the contencts of /opt/openstack-ansible/etc/openstack_deploy to /etc/ - note there is no ansible module which
+# can recursively copy folders and their content within the same host so we have to rsync
 
 - name: Set Fact
   set_fact:
     rsync_dry_run: "--dry-run"
   when: ansible_check_mode
+  tags: 
+    - rsync
 
 - name: Copy openstack_deploy to etc
   shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy /etc/
-  # always run
   check_mode: no
   register: rsync_result
   changed_when: rsync_result.stdout != ''
-  tags: copy
+  tags: 
+    - rsync
+
+- name: Create openstack_user_config.yml from template
+  template:
+    src: /files/openstack_user_config.yml
+    dest: /etc/openstack_deploy/openstack_user_config.yml
+    backup: yes
+  tags:
+    - user_config
+
+# Check to see if the user_secrets has already been populated
+- name: Check user_secrets
+    shell: grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | awk '{print $2}'
+    register: user_secrets
+  tags: 
+    - user_secrets
+    - test
+
+- name: Generate User Secrets
+  shell: python pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml args1
+    chdir: /opt/openstack-ansible/scripts
+  when: user_secrets.presence.changed
+
