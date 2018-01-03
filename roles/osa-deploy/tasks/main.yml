@@ -26,7 +26,13 @@
   register: user_secrets
   no_log: true
   tags: 
-    - user_secrets 
+    - rsync 
+
+- debug:
+    var: user_secrets
+    verbosity: 2
+  tags: 
+    - rsync
 
 - name: Copy openstack_deploy to etc
   shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /opt/openstack-ansible/etc/openstack_deploy /etc/
