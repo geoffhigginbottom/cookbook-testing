@@ -8,3 +8,9 @@
   # environment: 
   #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdb
   tags: bootstrap-ansible
+
+- name: Copy openstack_deploy to etc
+  copy:
+    src: /opt/openstack-ansible/etc/openstack_deploy
+    dest: /etc/
+  tags: copy
