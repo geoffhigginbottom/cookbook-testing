@@ -25,7 +25,7 @@
   check_mode: no
   register: rsync_result
   changed_when: rsync_result.stdout != ''
-  creates: /etc/openstack_deploy
+  creates: /etc/openstack_deploy/user_secrets.yml
   tags: 
     - rsync
 
