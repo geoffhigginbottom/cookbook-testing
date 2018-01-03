@@ -13,4 +13,5 @@
   copy:
     src: /opt/openstack-ansible/etc/openstack_deploy
     dest: /etc/
+    remote_src: yes
   tags: copy
