@@ -68,7 +68,7 @@ glance_swift_store_auth_version: 3
 glance_swift_store_auth_address: http://172.29.236.117:5000/v3
 glance_swift_store_container: glance_images
 glance_swift_store_endpoint_type: internalURL
-glance_swift_store_key: '{{ glance_service_password }}'
+glance_swift_store_key: '{{ '{{' }} glance_service_password }} '}}' }}'
 glance_swift_store_region: RegionOne
 glance_swift_store_user: 'service:glance'
 
