@@ -38,7 +38,7 @@
 
 # Check to see if the user_secrets has already been populated
 - name: Check user_secrets
-    shell: "grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | awk '{print $2}'"
+  shell: "grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | awk '{print $2}'"
     register: user_secrets
   tags: 
     - user_secrets
