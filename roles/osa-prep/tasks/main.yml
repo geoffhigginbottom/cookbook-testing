@@ -82,7 +82,9 @@
     - ubuntu
 
 - name: Debug Networking
-  debug: bridges.stdout.changed
+  debug: 
+    var: bridges.stdout.changed
+    verbosity: 2
   when: inventory_hostname | search("co")
   tags:
     - networking
