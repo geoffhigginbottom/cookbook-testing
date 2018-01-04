@@ -83,8 +83,9 @@
 
 - name: Debug Networking
   debug: bridges.stdout.changed
-    - networking
   when: inventory_hostname | search("co")
+  tags:
+    - networking
 
 - name: Restart Networking
   shell: "ip addr flush enp0s8 && ip addr flush enp0s9 && ip addr flush enp0s10 && ip addr flush enp0s16 && systemctl restart networking.service"
