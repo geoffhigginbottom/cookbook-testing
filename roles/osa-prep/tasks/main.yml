@@ -87,8 +87,8 @@
   when: inventory_hostname | search("co")
 
 - name: Restart Networking
-    shell: "ip addr flush enp0s8 && ip addr flush enp0s9 && ip addr flush enp0s10 && ip addr flush enp0s16 && systemctl restart networking.service"
-    when: (ansible_os_family == "Debian") and (inventory_hostname | search("co")) and (bridges.stdout.changed == true)
+  shell: "ip addr flush enp0s8 && ip addr flush enp0s9 && ip addr flush enp0s10 && ip addr flush enp0s16 && systemctl restart networking.service"
+  when: (ansible_os_family == "Debian") and (inventory_hostname | search("co")) and (bridges.stdout.changed == true)
   tags:
     - networking
     - ubuntu
