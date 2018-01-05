@@ -62,10 +62,11 @@ Vagrant.configure("2") do |config|
           #     Dir.mkdir dir
           # end # unless
           # file_to_disk = "#{dir}/#{hostname}-sdb.vmdk"
-          # unless File.exists?( file_to_disk )
-          #   vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
-          # end # unless
-          # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+          file_to_disk = "#{hostname}-sdb.vmdk"
+          unless File.exists?( file_to_disk )
+            vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
+          end # unless
+          vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
      
           if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
             vbox.customize ["modifyvm", :id, "--memory", 2048]
