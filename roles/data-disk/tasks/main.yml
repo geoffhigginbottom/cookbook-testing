@@ -37,6 +37,6 @@
 - name: Mount /dev/sdc1
   mount:
     path: /media/data_disk
-    src: LABEL=data_disk
+    src: /dev/sdc1
     fstype: xfs
     state: mounted
