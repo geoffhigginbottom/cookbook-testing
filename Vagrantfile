@@ -68,12 +68,12 @@ Vagrant.configure("2") do |config|
           # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
      
           if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
-            vbox.customize ["modifyvm", :id, "--memory", 4096]
+            vbox.customize ["modifyvm", :id, "--memory", 2048]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
           end # if prefix == controllernn
 
           if prefix == "compute01" or prefix == "compute02"
-            vbox.customize ["modifyvm", :id, "--memory", 6144]
+            vbox.customize ["modifyvm", :id, "--memory", 4096]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
           end # if prefix == computenn
       
