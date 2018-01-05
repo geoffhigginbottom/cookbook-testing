@@ -37,6 +37,6 @@
 - name: Mount /dev/sdc1
   mount:
     path: /media/data_disk
-    src: /dev/sdc1
+    src: LABEL=data_disk
     fstype: ext3
     state: mounted
