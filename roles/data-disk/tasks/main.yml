@@ -39,4 +39,4 @@
     path: /media/data_disk
     src: LABEL=/dev/sdc1
     fstype: ext3
-    state: present
+    state: mounted
