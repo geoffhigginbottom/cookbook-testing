@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
             ansible.groups = {
               "ntp-server" => ["controller01"],
               "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "lb01", "lb02"],
-              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01", "lb02"]
+              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01", "lb02"],
               "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02"]
             }
             ansible.host_vars = {
