@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
           #     Dir.mkdir dir
           # end # unless
           # file_to_disk = "#{dir}/#{hostname}-sdb.vmdk"
-          file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdb.vmdk"
+          file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
           unless File.exists?( file_to_disk )
             vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
           end # unless
