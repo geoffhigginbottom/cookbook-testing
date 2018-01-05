@@ -1,13 +1,12 @@
 ---
 
 - name: Bootstrap Ansible
-  # shell: ./scripts/bootstrap-ansible.sh args1 args2
-  shell: ./scripts/bootstrap-ansible.sh
+  shell: ./scripts/bootstrap-ansible.sh args1 args2
   args:
     chdir: /opt/openstack-ansible
     creates: /opt/ansible-runtime/bin/ansible
-  # environment: 
-  #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdb
+  environment: 
+    BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdc
   tags: 
     - bootstrap-ansible
 
