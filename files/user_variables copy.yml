@@ -1,0 +1,37 @@
+---
+# Copyright 2014, Rackspace US, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+###
+### This file contains commonly used overrides for convenience. Please inspect
+### the defaults for each role to find additional override options.
+###
+
+## Debug and Verbose options.
+debug: false
+
+## Common Glance Overrides
+glance_default_store: swift
+
+glance_swift_store_auth_version: 3
+glance_swift_store_auth_address: http://172.29.236.117:5000/v3
+glance_swift_store_container: glance_images
+glance_swift_store_endpoint_type: internalURL
+glance_swift_store_key: '{{ '{{' }} glance_service_password {{ '}}' }}'
+glance_swift_store_region: RegionOne
+glance_swift_store_user: 'service:glance'
+
+
+## HAProxy
+haproxy_use_keepalived: False
