@@ -38,5 +38,5 @@
   mount:
     path: /media/data_disk
     src: LABEL=data_disk
-    fstype: ext3
+    fstype: xfs
     state: mounted
