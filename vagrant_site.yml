@@ -2,12 +2,12 @@
 
 ### base build start ###
 - import_playbook: copy-keys.yml
-# - import_playbook: data-disk.yml
-- import_playbook: ntp-server.yml
-- import_playbook: ntp-client.yml
-- import_playbook: generate-key.yml
-- import_playbook: fetch-key.yml
-- import_playbook: distribute-key.yml
-- import_playbook: osa-prep.yml
-- import_playbook: osa-git.yml
+- import_playbook: data-disk.yml
+# - import_playbook: ntp-server.yml
+# - import_playbook: ntp-client.yml
+# - import_playbook: generate-key.yml
+# - import_playbook: fetch-key.yml
+# - import_playbook: distribute-key.yml
+# - import_playbook: osa-prep.yml
+# - import_playbook: osa-git.yml
 ### base build end ###
