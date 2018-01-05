@@ -33,3 +33,10 @@
     opts: "-i size=1024"
   tags:
     - filesystem
+
+- name: Mount /dev/sdc1
+  mount:
+    path: /media/data_disk
+    src: LABEL=/dev/sdc1
+    fstype: ext3
+    state: present
