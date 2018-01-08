@@ -21,10 +21,12 @@
   tags: 
     - disk-tools
 
-# - parted:
+
+# - name: Create parition
+#   parted:
 #     device: /dev/sdc
 #     number: 1
-#     state: absent
+#     state: present
 
 # - name: Create filesystem
 #   filesystem: 
@@ -34,9 +36,27 @@
 #   tags:
 #     - filesystem
 
+# - name: Mount /dev/sdc1
+#   mount:
+#     path: /media/data_disk
+#     src: /dev/sdc1
+#     fstype: xfs
+#     state: mounted
+
+
+
+# Remove mount
 - name: Mount /dev/sdc1
   mount:
     path: /media/data_disk
     src: /dev/sdc1
     fstype: xfs
     state: absent
+
+# Remove all partitions from disk
+- parted:
+    device: /dev/sdb
+    number: "{{ item.num }}"
+    state: absent
+  with_items:
+   - "{{ sdb_info.partitions }}"
