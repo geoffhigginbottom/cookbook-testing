@@ -7,7 +7,7 @@
     chdir: /opt/openstack-ansible
     creates: /opt/ansible-runtime/bin/ansible
   # environment: 
-  #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdb
+  #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdc
   tags: 
     - bootstrap-ansible
 

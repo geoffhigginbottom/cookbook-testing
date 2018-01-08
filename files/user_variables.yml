@@ -32,6 +32,26 @@ glance_swift_store_key: '{{ '{{' }} glance_service_password {{ '}}' }}'
 glance_swift_store_region: RegionOne
 glance_swift_store_user: 'service:glance'
 
+## Nova options
+nova_virt_type: qemu
+nova_cpu_allocation_ratio: 3.0 
+nova_ram_allocation_ratio: 1.0
+# As this is a virtual env, don't lose precious memory to the VM itself!
+nova_reserved_host_memory_mb: 1024
+
+# Neutron options
+neutron_l2_population: true
 
 ## HAProxy
-haproxy_use_keepalived: False
+haproxy_use_keepalived: false
+
+## Security Hardening
+apply_security_hardening: false
+
+
+
+
+bootstrap_host_aio_config: no
+bootstrap_host_data_disk_device: sdc
+bootstrap_host_data_disk_device_force: yes
+bootstrap_host_data_disk_min_size: 50
