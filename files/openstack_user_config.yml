@@ -16,7 +16,6 @@ global_overrides:
   external_lb_vip_address: 192.168.100.117
   tunnel_bridge: "br-vxlan"
   management_bridge: "br-mgmt"
-  
   provider_networks:
     - network:
         group_binds:
@@ -49,7 +48,7 @@ global_overrides:
         container_bridge: "br-vxlan"
         container_type: "veth"
         container_interface: "eth10"
-        container_mtu: "9000"
+        #container_mtu: "9000"
         ip_from_q: "tunnel"
         type: "vxlan"
         range: "1:1000"

@@ -44,14 +44,22 @@
 #     state: mounted
 
 
-
-# Remove mount
+# Following lines added to remove mounts and partions from existing snapshotted env
+# Remove mount from /etc/fstab
 - name: Mount /dev/sdc1
   mount:
     path: /media/data_disk
     src: /dev/sdc1
     fstype: xfs
     state: absent
+
+# Unmmount existing mounts
+- name: Mount /dev/sdc1
+  mount:
+    path: /media/data_disk
+    src: /dev/sdc1
+    fstype: xfs
+    state: unmounted
 
 # Remove all partitions from disk
 - parted:
