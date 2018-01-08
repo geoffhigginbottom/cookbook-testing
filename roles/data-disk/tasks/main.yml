@@ -21,10 +21,10 @@
   tags: 
     - disk-tools
 
-- parted:
-    device: /dev/sdc
-    number: 1
-    state: absent
+# - parted:
+#     device: /dev/sdc
+#     number: 1
+#     state: absent
 
 # - name: Create filesystem
 #   filesystem: 
