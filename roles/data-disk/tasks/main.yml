@@ -56,7 +56,5 @@
 # Remove all partitions from disk
 - parted:
     device: /dev/sdc
-    number: "{{ item.num }}"
+    number: 1
     state: absent
-  with_items:
-   - /dev/sdc1
