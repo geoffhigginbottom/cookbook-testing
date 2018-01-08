@@ -47,3 +47,11 @@ haproxy_use_keepalived: false
 
 ## Security Hardening
 apply_security_hardening: false
+
+
+
+
+bootstrap_host_aio_config: no
+bootstrap_host_data_disk_device: sdc
+bootstrap_host_data_disk_device_force: yes
+bootstrap_host_data_disk_min_size: 50
