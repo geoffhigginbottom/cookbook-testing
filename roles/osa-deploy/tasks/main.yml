@@ -12,7 +12,7 @@
   shell: ./scripts/bootstrap-ansible.sh
   args:
     chdir: /opt/openstack-ansible
-  when: boostrap.stat.isdir is defined and boostrap.stat.isdir == false
+  when: bootstrap.stat.isdir is defined and bootstrap.stat.isdir == false
   tags: 
     - bootstrap-ansible
 
