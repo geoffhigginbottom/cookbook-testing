@@ -24,7 +24,7 @@ compute02
 lb01
 lb02
 
-[data-disk: children]
+[data-disk:children]
 controller
 compute
 
