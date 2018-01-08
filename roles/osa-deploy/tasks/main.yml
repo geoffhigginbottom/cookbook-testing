@@ -1,13 +1,18 @@
 ---
+## Note - the creates setting does not appear to work for shell so need to add a test prior to running
+
+- name: Check Boostrap Status
+  stat:
+    path: /opt/ansible-runtime/bin/
+  register: bootstrap
+  tags: 
+    - bootstrap-ansible
 
 - name: Bootstrap Ansible
-  # shell: ./scripts/bootstrap-ansible.sh args1 args2
   shell: ./scripts/bootstrap-ansible.sh
   args:
     chdir: /opt/openstack-ansible
-    creates: /opt/ansible-runtime/bin/ansible
-  # environment: 
-  #   BOOTSTRAP_OPTS: bootstrap_host_data_disk_device=sdc
+  when: boostrap.stat.isdir is defined and boostrap.stat.isdir == false
   tags: 
     - bootstrap-ansible
 
