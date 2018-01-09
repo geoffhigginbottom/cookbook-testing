@@ -32,6 +32,7 @@
     fstype: ext4 
     dev: /dev/sdc1 
     opts: "-i size=1024"
+    force: yes
   tags:
     - filesystem
 
