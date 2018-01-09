@@ -45,7 +45,7 @@
 - name: Create LXC Volume Group
   lvg:
     vg: lxc
-    pvs: /dev/sdc
+    pvs: /dev/sdc1
   when: inventory_hostname | search("controller")
 
 # # Following lines added to remove mounts and partions to enable testing
