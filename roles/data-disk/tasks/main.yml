@@ -27,8 +27,8 @@
     path: /media/data_disk
     src: /dev/sdc1
     state: absent
-tags: 
-  - cleanup
+  tags: 
+    - cleanup
 
 # Unmmount existing mounts
 - name: Unmount /dev/sdc1
@@ -36,16 +36,16 @@ tags:
     path: /media/data_disk
     src: /dev/sdc1
     state: unmounted
-tags: 
-  - cleanup
+  tags: 
+    - cleanup
 
 # Remove all partitions from disk
 - parted:
     device: /dev/sdc
     number: 1
     state: absent
-tags: 
-  - cleanup
+  tags: 
+    - cleanup
 
 - name: Create parition
   parted:
