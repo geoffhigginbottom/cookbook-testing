@@ -45,14 +45,14 @@
 - name: Create LXC Volume Group
   lvg:
     vg: lxc
-    pvs: /dev/sdc
+    pvs: /dev/sdc1
   when: inventory_hostname | search("controller")
 
 
 - name: Create Cinder Volume Group
   lvg:
     vg: cinder-volumes
-    pvs: /dev/sdc
+    pvs: /dev/sdc1
   when: inventory_hostname | search("compute")
 
 # # Following lines added to remove mounts and partions to enable testing
