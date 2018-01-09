@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
             vbox.customize ["modifyvm", :id, "--cpus", 2]
             file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
-              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 80 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
             vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end # if prefix == controllernn
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
             vbox.customize ["modifyvm", :id, "--cpus", 2]
             file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
-              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 200 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 300 * 1024]
             end # unless
             vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end # if prefix == computenn
