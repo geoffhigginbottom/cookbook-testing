@@ -53,7 +53,8 @@ Vagrant.configure("2") do |config|
           if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
             vbox.customize ["modifyvm", :id, "--memory", 2048]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
-            file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
+            # file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
+            file_to_disk = "#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
