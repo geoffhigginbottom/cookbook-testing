@@ -27,13 +27,13 @@
     - ubuntu
 
 
-- name: Install  ansible on controller01
-  apt: name={{ item }} state=present
-  with_items:
-    - ansible
-  when: inventory_hostname | search("controller01")
-  tags:
-    - packages
+# - name: Install  ansible on controller01
+#   apt: name={{ item }} state=present
+#   with_items:
+#     - ansible
+#   when: inventory_hostname | search("controller01")
+#   tags:
+#     - packages
 
 - name: Upgrade CentOS
   yum:
