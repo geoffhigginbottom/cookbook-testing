@@ -19,12 +19,6 @@ br_vxlan_mask: 255.255.255.0
 br_storage_bridge_ports: enp0s16
 br_storage_mask: 255.255.255.0
 
-
-bootstrap_host_aio_config: no
-bootstrap_host_data_disk_device: sdc
-bootstrap_host_data_disk_device_force: yes
-bootstrap_host_data_disk_min_size: 50
-
 # ### Hosts File Settings ###
 # domain_name: openstack-newton.local
 
