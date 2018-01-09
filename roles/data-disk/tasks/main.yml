@@ -34,7 +34,6 @@
 - name: Unmount /dev/sdc1
   mount:
     path: /media/data_disk
-    src: /dev/sdc1
     state: unmounted
   tags: 
     - cleanup
