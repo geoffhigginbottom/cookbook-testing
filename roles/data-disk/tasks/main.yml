@@ -26,23 +26,26 @@
   mount:
     path: /media/data_disk
     src: /dev/sdc1
-    fstype: xfs
     state: absent
+tags: 
+  - cleanup
 
 # Unmmount existing mounts
 - name: Unmount /dev/sdc1
   mount:
     path: /media/data_disk
     src: /dev/sdc1
-    fstype: xfs
     state: unmounted
+tags: 
+  - cleanup
 
 # Remove all partitions from disk
 - parted:
     device: /dev/sdc
     number: 1
     state: absent
-
+tags: 
+  - cleanup
 
 - name: Create parition
   parted:
