@@ -20,6 +20,7 @@
     - bridge-utils
     - git
     - python-dev
+    - python-yaml
   when: ansible_os_family == "Debian"
   tags:
     - packages
