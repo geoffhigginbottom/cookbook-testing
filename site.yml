@@ -1,0 +1,16 @@
+---
+## Note vagrant_site.yml must have run in order for the
+## playbook copy-keys.yml to have executed successfully
+## This site is really only to enable manual testing with 
+## ansible-playbook command, vagrant_site.yml should
+## deploy the whole environment.
+
+- import_playbook: data-disk.yml
+- import_playbook: ntp-server.yml
+- import_playbook: ntp-client.yml
+- import_playbook: generate-key.yml
+- import_playbook: fetch-key.yml
+- import_playbook: distribute-key.yml
+- import_playbook: osa-prep.yml
+- import_playbook: osa-git.yml
+# - import_playbook: osa-deploy.yml
