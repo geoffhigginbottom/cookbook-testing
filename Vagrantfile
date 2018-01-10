@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
             unless File.exists?( file_to_disk )
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
-            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end # if prefix == controllernn
 
           if prefix == "compute01" or prefix == "compute02"
@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
             unless File.exists?( file_to_disk )
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 150 * 1024]
             end # unless
-            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end # if prefix == computenn
       
         end # box.vm virtualbox
