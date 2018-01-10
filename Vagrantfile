@@ -53,8 +53,7 @@ Vagrant.configure("2") do |config|
           if prefix == "controller01" or prefix == "controller02" or prefix == "controller03"
             vbox.customize ["modifyvm", :id, "--memory", 2048]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
-            # file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
-            file_to_disk = "#{hostname}/#{hostname}-sdc.vmdk"
+            file_to_disk = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
@@ -64,9 +63,9 @@ Vagrant.configure("2") do |config|
           if prefix == "compute01" or prefix == "compute02"
             vbox.customize ["modifyvm", :id, "--memory", 4096]
             vbox.customize ["modifyvm", :id, "--cpus", 2]
-            file_to_disk = "/media/vms/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
+            file_to_disk = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
-              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 300 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 150 * 1024]
             end # unless
             vbox.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
           end # if prefix == computenn
