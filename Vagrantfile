@@ -7,7 +7,7 @@ nodes = {
  'controller03' => [1, 112],
  'compute01' => [1, 113],
  'compute02' => [1, 114],
- 'lb02' => [1, 101],
+ # 'lb02' => [1, 101],
  'lb01' => [1, 100],
 }
 
@@ -79,8 +79,8 @@ Vagrant.configure("2") do |config|
             ansible.playbook = "vagrant_site.yml"
             ansible.groups = {
               "ntp-server" => ["controller01"],
-              "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "lb01", "lb02"],
-              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01", "lb02"],
+              "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "lb01"],
+              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01"],
               "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02"]
             }
             ansible.host_vars = {

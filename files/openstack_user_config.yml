@@ -165,5 +165,5 @@ repo-infra_hosts:
 # haproxy_hosts:
   lb01:
     ip: 172.29.236.100
-   # lb2:
+   # lb02:
    #   ip: 172.29.236.101
