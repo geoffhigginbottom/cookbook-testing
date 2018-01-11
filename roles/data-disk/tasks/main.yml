@@ -11,83 +11,15 @@
   when: ansible_os_family == "Debian"
   tags: update
 
-# - name: Install Disk Tools
-#   package: 
-#     name: "{{ item }}"
-#     state: present
-#   with_items:
-#     - parted
-#     - xfsprogs
-#   tags: 
-#     - disk-tools
-
-# - name: Create parition
-#   parted:
-#     device: /dev/sdc
-#     number: 1
-#     state: present
-
-# - name: Create filesystem
-#   filesystem: 
-#     fstype: ext4 
-#     dev: /dev/sdc1 
-#     #opts: "-i size=1024"
-#   tags:
-#     - filesystem
-
-# - name: Mount /dev/sdc1
-#   mount:
-#     path: /media/data_disk
-#     src: /dev/sdc1
-#     fstype: ext4
-#     state: mounted
-
 - name: Create LXC Volume Group
   lvg:
     vg: lxc
-    pvs: /dev/sdc
+    pvs: "{{ data_disk }}"
   when: inventory_hostname | search("controller")
 
 
 - name: Create Cinder Volume Group
   lvg:
     vg: cinder-volumes
-    pvs: /dev/sdc
+    pvs: "{{ data_disk }}"
   when: inventory_hostname | search("compute")
-
-# # Following lines added to remove mounts and partions to enable testing
-
-# # Remove LXC Volume Group 
-# - name: Remove LXC Volume Group
-#   lvg:
-#     vg: lxc
-#     state: absent
-#   tags: 
-#     - cleanup
-
-# # Remove mount from /etc/fstab
-# - name: Remove auto mount /dev/sdc1
-#   mount:
-#     path: /media/data_disk
-#     src: /dev/sdc1
-#     state: absent
-#   tags: 
-#     - cleanup
-
-# # Unmmount existing mounts
-# - name: Unmount /dev/sdc1
-#   mount:
-#     path: /media/data_disk
-#     state: unmounted
-#   tags: 
-#     - cleanup
-
-# # Remove all partitions from disk
-# - parted:
-#     device: /dev/sdc
-#     number: 1
-#     state: absent
-#   tags: 
-#     - cleanup
-
-

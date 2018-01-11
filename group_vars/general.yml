@@ -4,6 +4,8 @@ osa_repo: 'https://github.com/openstack/openstack-ansible.git'
 osa_version: 15.1.13
 osa_destination: /opt/openstack-ansible
 
+data_disk: /dev/sdb
+
 # Neutron’s VLAN bridge (br-vlan)
 br_vlan_bridge_ports: enp0s8
 
