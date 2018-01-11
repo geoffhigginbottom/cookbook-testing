@@ -84,7 +84,8 @@
     src: files/interfaces
     dest: /etc/network/interfaces
     backup: yes
-  when: (ansible_os_family == "Debian") and (inventory_hostname | search("co"))
+  # when: (ansible_os_family == "Debian") and (inventory_hostname | search("co"))
+  when: ansible_os_family == "Debian"
   register: bridges
   tags:
     - networking
@@ -94,13 +95,15 @@
   debug: 
     var: bridges.changed
     verbosity: 2
-  when: inventory_hostname | search("co")
+  # when: inventory_hostname | search("co")
+  when: ansible_os_family == "Debian"
   tags:
     - networking
 
 - name: Restart Networking
   shell: "ip addr flush enp0s8 && ip addr flush enp0s9 && ip addr flush enp0s10 && ip addr flush enp0s16 && systemctl restart networking.service"
-  when: (ansible_os_family == "Debian") and (inventory_hostname | search("co")) and (bridges.changed == true)
+  # when: (ansible_os_family == "Debian") and (inventory_hostname | search("co")) and (bridges.changed == true)
+  when: (ansible_os_family == "Debian") and (bridges.changed == true)
   tags:
     - networking
     - ubuntu

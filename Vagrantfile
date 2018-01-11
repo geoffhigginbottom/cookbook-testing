@@ -13,6 +13,7 @@ nodes = {
 
 Vagrant.configure("2") do |config| 
   config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "bento/ubuntu-16.04"
   # config.vm.synced_folder ".", "/vagrant"
   config.vm.usable_port_range= 2800..2900
   nodes.each do |prefix, (count, ip_start)|
@@ -58,6 +59,7 @@ Vagrant.configure("2") do |config|
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
             vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            # vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
           end # if prefix == controllernn
 
           if prefix == "compute01" or prefix == "compute02"
@@ -89,8 +91,8 @@ Vagrant.configure("2") do |config|
               "controller03" => {"br_mgmt_ip" => "172.29.236.112", "br_vxlan_ip" => "172.29.240.112", "br_storage_ip" => "172.29.244.112"},
               "compute01" => {"br_mgmt_ip" => "172.29.236.113", "br_vxlan_ip" => "172.29.240.113", "br_storage_ip" => "172.29.244.113"},
               "compute02" => {"br_mgmt_ip" => "172.29.236.114", "br_vxlan_ip" => "172.29.240.114", "br_storage_ip" => "172.29.244.114"},
-              "lb01" => {"br_mgmt_ip" => "172.29.236.100"},
-              "lb02" => {"br_mgmt_ip" => "172.29.236.101"}
+              "lb01" => {"br_mgmt_ip" => "172.29.236.100","br_vxlan_ip" => "172.29.240.100", "br_storage_ip" => "172.29.244.100"},
+              "lb02" => {"br_mgmt_ip" => "172.29.236.101","br_vxlan_ip" => "172.29.240.101", "br_storage_ip" => "172.29.244.101"}
             }
             ansible.extra_vars = {
               ansible_python_interpreter: "/usr/bin/python3"
