@@ -7,6 +7,7 @@
   authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
   tags: auth_key
 
-- name: Add Authorised Key Ubuntu User
-  authorized_key: user=ubuntu key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-  tags: auth_keys
+## Had to disable this for the bento image
+# - name: Add Authorised Key Ubuntu User
+#   authorized_key: user=ubuntu key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+#   tags: auth_keys
