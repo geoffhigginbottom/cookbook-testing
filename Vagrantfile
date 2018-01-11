@@ -12,7 +12,7 @@ nodes = {
 }
 
 Vagrant.configure("2") do |config| 
-  config.vm.box = "ubuntu/xenial64"
+  # config.vm.box = "ubuntu/xenial64"
   config.vm.box = "bento/ubuntu-16.04"
   # config.vm.synced_folder ".", "/vagrant"
   config.vm.usable_port_range= 2800..2900
@@ -58,8 +58,8 @@ Vagrant.configure("2") do |config|
             unless File.exists?( file_to_disk )
               vbox.customize ['createhd', '--filename', file_to_disk, '--size', 120 * 1024]
             end # unless
-            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
-            # vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
+            # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
           end # if prefix == controllernn
 
           if prefix == "compute01" or prefix == "compute02"
