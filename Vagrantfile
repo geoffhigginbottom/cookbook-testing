@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
             end # unless
             # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
             # vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
-            vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # for geerlingguy
+            vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', file_to_disk] # for geerlingguy
           end # if prefix == controllernn
 
           if prefix == "compute01" or prefix == "compute02"
@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
             end # unless
             # vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
             # vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
-            vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # for geerlingguy
+            vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', file_to_disk] # for geerlingguy
           end # if prefix == computenn
       
         end # box.vm virtualbox
