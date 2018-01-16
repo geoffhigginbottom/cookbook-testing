@@ -100,3 +100,27 @@
     creates: /var/log/lxc
   tags: 
     - setup_hosts
+
+# - namne: Run install-haproxy.yml
+#   shell: openstack-ansible install-haproxy.yml
+#   args:
+#     chdir: /opt/openstack-ansible/playbooks
+#     #creates: /var/log/lxc
+#   tags: 
+#     - install_haproxy
+
+- name: Run setup-infrastructure.yml
+  shell: openstack-ansible setup-infrastructure.yml
+  args:
+    chdir: /opt/openstack-ansible/playbooks
+    #creates: /var/log/lxc
+  tags: 
+    - setup_infrastructure
+
+- name: Run setup-openstack.yml
+  shell: openstack-ansible setup-openstack.yml
+  args:
+    chdir: /opt/openstack-ansible/playbooks
+    #creates: /var/log/lxc
+  tags: 
+    - setup_openstack
