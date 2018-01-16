@@ -7,6 +7,9 @@ nodes = {
  'controller03' => [1, 112],
  'compute01' => [1, 113],
  'compute02' => [1, 114],
+ 'swift01' => [1, 115],
+ 'swift02' => [1, 116],
+ 'swift03' => [1, 117],
  # 'lb02' => [1, 101],
  'lb01' => [1, 100],
 }
@@ -75,7 +78,25 @@ Vagrant.configure("2") do |config|
             # vbox.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk] # For Bento Image
             vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', file_to_disk] # for geerlingguy
           end # if prefix == computenn
-      
+          
+          if prefix == "swift01" or prefix == "swift02" or prefix == "swift03"
+            vbox.customize ["modifyvm", :id, "--memory", 1024]
+            vbox.customize ["modifyvm", :id, "--cpus", 1]
+            file_to_disk = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
+            unless File.exists?( file_to_disk )
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 40 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 40 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 40 * 1024]
+              vbox.customize ['createhd', '--filename', file_to_disk, '--size', 40 * 1024]
+            end # unless
+            vbox.customise ['storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi', '--controller', 'LSILogic', '--portcount', '4',]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 0, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+            vbox.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+          end # if prefix == swiftnn
+
+
         end # box.vm virtualbox
 
         if prefix == "lb01" # only run once the last VM has been brought on line
