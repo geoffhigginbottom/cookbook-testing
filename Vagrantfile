@@ -115,9 +115,10 @@ Vagrant.configure("2") do |config|
             ansible.playbook = "vagrant_site.yml"
             ansible.groups = {
               "ntp-server" => ["controller01"],
-              "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "lb01"],
-              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "lb01"],
-              "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02"]
+              "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "swift01", "swift02", "swift03", "lb01"],
+              "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "swift01", "swift02", "swift03", "lb01"],
+              "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02" "swift01", "swift02", "swift03",]
+              "swift" => ["swift01", "swift02", "swift03"]
             }
             ansible.host_vars = {
               "controller01" => {"br_mgmt_ip" => "172.29.236.110", "br_vxlan_ip" => "172.29.240.110", "br_storage_ip" => "172.29.244.110"},
@@ -125,6 +126,9 @@ Vagrant.configure("2") do |config|
               "controller03" => {"br_mgmt_ip" => "172.29.236.112", "br_vxlan_ip" => "172.29.240.112", "br_storage_ip" => "172.29.244.112"},
               "compute01" => {"br_mgmt_ip" => "172.29.236.113", "br_vxlan_ip" => "172.29.240.113", "br_storage_ip" => "172.29.244.113"},
               "compute02" => {"br_mgmt_ip" => "172.29.236.114", "br_vxlan_ip" => "172.29.240.114", "br_storage_ip" => "172.29.244.114"},
+              "swift01" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
+              "swift02" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
+              "swift03" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
               "lb01" => {"br_mgmt_ip" => "172.29.236.100","br_vxlan_ip" => "172.29.240.100", "br_storage_ip" => "172.29.244.100"},
               "lb02" => {"br_mgmt_ip" => "172.29.236.101","br_vxlan_ip" => "172.29.240.101", "br_storage_ip" => "172.29.244.101"}
             }
