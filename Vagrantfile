@@ -82,27 +82,32 @@ Vagrant.configure("2") do |config|
           if prefix == "swift01" or prefix == "swift02" or prefix == "swift03"
             vbox.customize ["modifyvm", :id, "--memory", 1024]
             vbox.customize ["modifyvm", :id, "--cpus", 1]
-            file_to_disk0 = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
-            file_to_disk1 = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdd.vmdk"
-            file_to_disk2 = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sde.vmdk"
-            file_to_disk3 = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdf.vmdk"
-            unless File.exists?( file_to_disk0 )
-              vbox.customize ["createhd", "--filename", file_to_disk0, "--size", 40 * 1024]
+            file_to_disk_sdc = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
+            file_to_disk_sdd = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdd.vmdk"
+            file_to_disk_sde = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sde.vmdk"
+            file_to_disk_sdf = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdf.vmdk"
+            file_to_disk_sdg = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdg.vmdk"
+            unless File.exists?( file_to_disk_sdc )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdc, "--size", 40 * 1024]
             end # unless
-            unless File.exists?( file_to_disk1 )
-              vbox.customize ["createhd", "--filename", file_to_disk1, "--size", 40 * 1024]
+            unless File.exists?( file_to_disk_sdd )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdd, "--size", 40 * 1024]
             end # unless
-            unless File.exists?( file_to_disk2 )
-              vbox.customize ["createhd", "--filename", file_to_disk2, "--size", 40 * 1024]
+            unless File.exists?( file_to_disk_sde )
+              vbox.customize ["createhd", "--filename", file_to_disk_sde, "--size", 40 * 1024]
             end # unless
-            unless File.exists?( file_to_disk3 )
-              vbox.customize ["createhd", "--filename", file_to_disk3, "--size", 40 * 1024]
+            unless File.exists?( file_to_disk_sdf )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdf, "--size", 40 * 1024]
+            end # unless
+            unless File.exists?( file_to_disk_sdg )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdg, "--size", 40 * 1024]
             end # unless
             vbox.customize ["storagectl", :id, "--name", "SCSI Controller", "--add", "scsi", "--controller", "LSILogic", "--portcount", "16",]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk0]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 1, "--device", 0, "--type", "hdd", "--medium", file_to_disk1]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk2]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 3, "--device", 0, "--type", "hdd", "--medium", file_to_disk3]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdc]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 1, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdd]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sde]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 3, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdf]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 4, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdg]
           end # if prefix == swiftnn
 
 
