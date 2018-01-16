@@ -126,9 +126,9 @@ Vagrant.configure("2") do |config|
               "controller03" => {"br_mgmt_ip" => "172.29.236.112", "br_vxlan_ip" => "172.29.240.112", "br_storage_ip" => "172.29.244.112"},
               "compute01" => {"br_mgmt_ip" => "172.29.236.113", "br_vxlan_ip" => "172.29.240.113", "br_storage_ip" => "172.29.244.113"},
               "compute02" => {"br_mgmt_ip" => "172.29.236.114", "br_vxlan_ip" => "172.29.240.114", "br_storage_ip" => "172.29.244.114"},
-              "swift01" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
-              "swift02" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
-              "swift03" => {"br_mgmt_ip" => "172.29.236.#{ip_start+i}", "br_vxlan_ip" => "172.29.240.#{ip_start+i}", "br_storage_ip" => "172.29.244.#{ip_start+i}"},
+              "swift01" => {"br_mgmt_ip" => "172.29.236.115", "br_vxlan_ip" => "172.29.240.115", "br_storage_ip" => "172.29.244.115"},
+              "swift02" => {"br_mgmt_ip" => "172.29.236.116", "br_vxlan_ip" => "172.29.240.116", "br_storage_ip" => "172.29.244.116"},
+              "swift03" => {"br_mgmt_ip" => "172.29.236.117", "br_vxlan_ip" => "172.29.240.117", "br_storage_ip" => "172.29.244.117"},
               "lb01" => {"br_mgmt_ip" => "172.29.236.100","br_vxlan_ip" => "172.29.240.100", "br_storage_ip" => "172.29.244.100"},
               "lb02" => {"br_mgmt_ip" => "172.29.236.101","br_vxlan_ip" => "172.29.240.101", "br_storage_ip" => "172.29.244.101"}
             }
