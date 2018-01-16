@@ -86,7 +86,8 @@ Vagrant.configure("2") do |config|
             file_to_disk_sdd = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdd.vmdk"
             file_to_disk_sde = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sde.vmdk"
             file_to_disk_sdf = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdf.vmdk"
-            # file_to_disk_sdg = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdg.vmdk"
+            file_to_disk_sdg = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdg.vmdk"
+            file_to_disk_sdh = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdh.vmdk"
             unless File.exists?( file_to_disk_sdc )
               vbox.customize ["createhd", "--filename", file_to_disk_sdc, "--size", 40 * 1024]
             end # unless
@@ -99,9 +100,12 @@ Vagrant.configure("2") do |config|
             unless File.exists?( file_to_disk_sdf )
               vbox.customize ["createhd", "--filename", file_to_disk_sdf, "--size", 40 * 1024]
             end # unless
-            # unless File.exists?( file_to_disk_sdg )
-            #   vbox.customize ["createhd", "--filename", file_to_disk_sdg, "--size", 40 * 1024]
-            # end # unless
+            unless File.exists?( file_to_disk_sdg )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdg, "--size", 40 * 1024]
+            end # unless
+            unless File.exists?( file_to_disk_sdh )
+              vbox.customize ["createhd", "--filename", file_to_disk_sdh, "--size", 40 * 1024]
+            end # unless
             unless File.exists?( file_to_disk_sdc )  # cannot check for prescence of the controller, but we can assume that if the disk exists, the controller has also been created
               vbox.customize ["storagectl", :id, "--name", "SAS Controller", "--add", "sas", "--controller", "LSILogicSAS", "--portcount", "16",]
             end # unless
@@ -109,7 +113,8 @@ Vagrant.configure("2") do |config|
             vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 1, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdd]
             vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sde]
             vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 3, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdf]
-            # vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 4, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdg]
+            vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 4, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdg]
+            vbox.customize ["storageattach", :id, "--storagectl", "SAS Controller", "--port", 5, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdh]
           end # if prefix == swiftnn
 
         end # box.vm virtualbox
