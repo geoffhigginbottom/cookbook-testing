@@ -117,7 +117,7 @@ Vagrant.configure("2") do |config|
               "ntp-server" => ["controller01"],
               "ntp-client" => ["controller02", "controller03", "compute01", "compute02", "swift01", "swift02", "swift03", "lb01"],
               "general" => ["controller01", "controller02", "controller03", "compute01", "compute02", "swift01", "swift02", "swift03", "lb01"],
-              "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02" "swift01", "swift02", "swift03",]
+              "data-disk" => ["controller01", "controller02", "controller03", "compute01", "compute02" "swift01", "swift02", "swift03"],
               "swift" => ["swift01", "swift02", "swift03"]
             }
             ansible.host_vars = {
