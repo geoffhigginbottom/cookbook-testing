@@ -85,6 +85,7 @@
     path: /srv/node/sdc
     src: /dev/sdc1
     fstype: xfs
+    opts: noatime,nodiratime,nobarrier,logbufs=8,noauto
     state: mounted
 
 - name: Mount /dev/sdd1
