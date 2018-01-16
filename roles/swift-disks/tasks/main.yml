@@ -93,6 +93,7 @@
     path: /srv/node/sdd
     src: /dev/sdd1
     fstype: xfs
+    opts: noatime,nodiratime,nobarrier,logbufs=8,noauto
     state: mounted
 
 - name: Mount /dev/sde1
@@ -100,6 +101,7 @@
     path: /srv/node/sde
     src: /dev/sde1
     fstype: xfs
+    opts: noatime,nodiratime,nobarrier,logbufs=8,noauto
     state: mounted
 
 - name: Mount /dev/sdf1
@@ -107,6 +109,7 @@
     path: /srv/node/sdf
     src: /dev/sdf1
     fstype: xfs
+    opts: noatime,nodiratime,nobarrier,logbufs=8,noauto
     state: mounted
 
 - name: Mount /dev/sdg1
@@ -114,4 +117,5 @@
     path: /srv/node/sdg
     src: /dev/sdg1
     fstype: xfs
+    opts: noatime,nodiratime,nobarrier,logbufs=8,noauto
     state: mounted
