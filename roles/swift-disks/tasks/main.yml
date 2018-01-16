@@ -1,0 +1,116 @@
+---
+
+- name: Install Disk Tools
+  package: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - parted
+    - xfsprogs
+  tags: 
+    - disk-tools
+
+- name: Create parition sdc
+  parted:
+    device: /dev/sdc
+    number: 1
+    state: present
+
+- name: Create parition sdd
+  parted:
+    device: /dev/sdd
+    number: 1
+    state: present
+
+- name: Create parition sde
+  parted:
+    device: /dev/sde
+    number: 1
+    state: present
+
+- name: Create parition sdf
+  parted:
+    device: /dev/sdf
+    number: 1
+    state: present
+
+- name: Create parition sdg
+  parted:
+    device: /dev/sdg
+    number: 1
+    state: present
+
+- name: Create filesystem sdc
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sdc1 
+    #opts: "-i size=1024"
+  tags:
+    - filesystem
+
+- name: Create filesystem sdd
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sdd1 
+    #opts: "-i size=1024"
+  tags:
+    - filesystem
+
+- name: Create filesystem sde
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sde1 
+    #opts: "-i size=1024"
+  tags:
+    - filesystem
+
+- name: Create filesystem sdf
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sdf1 
+    #opts: "-i size=1024"
+  tags:
+    - filesystem
+
+- name: Create filesystem sdg
+  filesystem: 
+    fstype: xfs 
+    dev: /dev/sdg1 
+    #opts: "-i size=1024"
+  tags:
+    - filesystem
+
+- name: Mount /dev/sdc1
+  mount:
+    path: /srv/node/sdc
+    src: /dev/sdc1
+    fstype: xfs
+    state: mounted
+
+- name: Mount /dev/sdd1
+  mount:
+    path: /srv/node/sdd
+    src: /dev/sdd1
+    fstype: xfs
+    state: mounted
+
+- name: Mount /dev/sde1
+  mount:
+    path: /srv/node/sde
+    src: /dev/sde1
+    fstype: xfs
+    state: mounted
+
+- name: Mount /dev/sdf1
+  mount:
+    path: /srv/node/sdf
+    src: /dev/sdf1
+    fstype: xfs
+    state: mounted
+
+- name: Mount /dev/sdg1
+  mount:
+    path: /srv/node/sdg
+    src: /dev/sdg1
+    fstype: xfs
+    state: mounted
