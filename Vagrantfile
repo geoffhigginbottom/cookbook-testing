@@ -102,7 +102,7 @@ Vagrant.configure("2") do |config|
             unless File.exists?( file_to_disk_sdg )
               vbox.customize ["createhd", "--filename", file_to_disk_sdg, "--size", 40 * 1024]
             end # unless
-            unless File.exists?( SCSI_Controller )
+            unless exists?( SCSI_Controller )
               vbox.customize ["storagectl", :id, "--name", "SCSI Controller", "--add", "scsi", "--controller", "LSILogic", "--portcount", "16",]
             end # unless
             vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdc]
