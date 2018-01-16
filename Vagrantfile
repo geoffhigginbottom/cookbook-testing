@@ -106,11 +106,11 @@ Vagrant.configure("2") do |config|
             #   vbox.customize ["storagectl", :id, "--name", "SCSI Controller", "--add", "scsi", "--controller", "LSILogic", "--portcount", "16",]
             # end # unless
             vbox.customize ["storagectl", :id, "--name", "SCSI Controller", "--add", "scsi", "--controller", "LSILogic", "--portcount", "16",]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdc]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 1, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdd]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sde]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 3, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdf]
-            vbox.customize ["storageattach", :id, "--storagectl", "SCSI_Controller", "--port", 4, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdg]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdc]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 1, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdd]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sde]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 3, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdf]
+            vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 4, "--device", 0, "--type", "hdd", "--medium", file_to_disk_sdg]
           end # if prefix == swiftnn
 
 
