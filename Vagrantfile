@@ -84,10 +84,10 @@ Vagrant.configure("2") do |config|
             vbox.customize ["modifyvm", :id, "--cpus", 1]
             file_to_disk = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
             unless File.exists?( file_to_disk )
-              vbox.customize ["createhd", "--filename", file_to_disk, "--size", 40 * 1024]
-              vbox.customize ["createhd", "--filename", file_to_disk, "--size", 40 * 1024]
-              vbox.customize ["createhd", "--filename", file_to_disk, "--size", 40 * 1024]
-              vbox.customize ["createhd", "--filename", file_to_disk, "--size", 40 * 1024]
+              vbox.customize ["createhd", "--filename", file_to_disk0, "--size", 40 * 1024]
+              vbox.customize ["createhd", "--filename", file_to_disk1, "--size", 40 * 1024]
+              vbox.customize ["createhd", "--filename", file_to_disk2, "--size", 40 * 1024]
+              vbox.customize ["createhd", "--filename", file_to_disk3, "--size", 40 * 1024]
             end # unless
             vbox.customise ["storagectl", :id, "--name", "SCSI Controller", "--add", "scsi", "--controller", "LSILogic", "--portcount", "4",]
             vbox.customize ["storageattach", :id, "--storagectl", "SCSI Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", file_to_disk]
