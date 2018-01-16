@@ -82,10 +82,10 @@ Vagrant.configure("2") do |config|
           if prefix == "swift01" or prefix == "swift02" or prefix == "swift03"
             vbox.customize ["modifyvm", :id, "--memory", 1024]
             vbox.customize ["modifyvm", :id, "--cpus", 1]
-            file_to_disk_sdc = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdc.vmdk"
-            file_to_disk_sdd = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdd.vmdk"
-            file_to_disk_sde = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sde.vmdk"
-            file_to_disk_sdf = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdf.vmdk"
+            file_to_disk_sdc = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdc.vmdk"
+            file_to_disk_sdd = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdd.vmdk"
+            file_to_disk_sde = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sde.vmdk"
+            file_to_disk_sdf = "/media/virtual_machines/cookbookv4/#{hostname}/swift/#{hostname}-sdf.vmdk"
             # file_to_disk_sdg = "/media/virtual_machines/cookbookv4/#{hostname}/#{hostname}-sdg.vmdk"
             unless File.exists?( file_to_disk_sdc )
               vbox.customize ["createhd", "--filename", file_to_disk_sdc, "--size", 40 * 1024]
