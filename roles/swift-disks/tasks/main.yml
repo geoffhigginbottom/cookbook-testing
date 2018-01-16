@@ -34,11 +34,11 @@
     number: 1
     state: present
 
-- name: Create parition sdg
-  parted:
-    device: /dev/sdg
-    number: 1
-    state: present
+# - name: Create parition sdg
+#   parted:
+#     device: /dev/sdg
+#     number: 1
+#     state: present
 
 - name: Create filesystem sdc
   filesystem: 
@@ -72,13 +72,13 @@
   tags:
     - filesystem
 
-- name: Create filesystem sdg
-  filesystem: 
-    fstype: xfs 
-    dev: /dev/sdg1 
-    #opts: "-i size=1024"
-  tags:
-    - filesystem
+# - name: Create filesystem sdg
+#   filesystem: 
+#     fstype: xfs 
+#     dev: /dev/sdg1 
+#     #opts: "-i size=1024"
+#   tags:
+#     - filesystem
 
 - name: Mount /dev/sdc1
   mount:
@@ -108,9 +108,9 @@
     fstype: xfs
     state: mounted
 
-- name: Mount /dev/sdg1
-  mount:
-    path: /srv/node/sdg
-    src: /dev/sdg1
-    fstype: xfs
-    state: mounted
+# - name: Mount /dev/sdg1
+#   mount:
+#     path: /srv/node/sdg
+#     src: /dev/sdg1
+#     fstype: xfs
+#     state: mounted
