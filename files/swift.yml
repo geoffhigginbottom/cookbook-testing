@@ -51,21 +51,21 @@ global_overrides:
 # Level: swift-proxy_hosts (required)
 swift-proxy_hosts:
 
-  infra1:
+  controller01:
     ip: 172.29.236.110
     container_vars:
       swift_proxy_vars:
         read_affinity: "r1=100"
         write_affinity: "r1"
         write_affinity_node_count: "2 * replicas"
-  infra2:
+  controller02:
     ip: 172.29.236.111
     container_vars:
       swift_proxy_vars:
         read_affinity: "r2=100"
         write_affinity: "r2"
         write_affinity_node_count: "2 * replicas"
-  infra3:
+  controller03:
     ip: 172.29.236.112
     container_vars:
       swift_proxy_vars:
