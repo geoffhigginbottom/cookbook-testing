@@ -1,0 +1,92 @@
+---
+# Level: global_overrides (required)
+global_overrides:
+# Level: swift (required)  
+  swift:
+    storage_network: 'br-storage'
+    replication_network: 'br-repl'
+    part_power: 11
+    repl_number: 3
+    min_part_hours: 1
+    region: 1
+    zone: 0
+    weight: 100
+    #statsd_host: statsd.example.lan
+    #statsd_port: 8125
+    mount_point: /srv/node
+
+#   Level: drives (required)    
+    drives:
+      - name: sdc
+      - name: sdd
+      - name: sde
+      - name: sdf
+      - name: sdg
+
+#   Level: account (optional)
+
+#   Level: container (optional)
+
+#   Level: storage_policies (required)
+#   Level: policy (required)
+    storage_policies:
+      - policy:
+          name: gold
+          index: 0
+          default: True
+      - policy:
+          name: silver
+          index: 1
+          repl_number: 3
+          deprecated: True
+      - policy:
+          name: ec10-4
+          index: 2
+          policy_type: erasure_coding
+          ec_type: jerasure_rs_vand
+          ec_num_data_fragments: 10
+          ec_num_parity_fragments: 4
+          ec_object_segment_size: 1048576
+
+# Level: swift-proxy_hosts (required)
+swift-proxy_hosts:
+
+  infra1:
+    ip: 172.29.236.110
+    container_vars:
+      swift_proxy_vars:
+        read_affinity: "r1=100"
+        write_affinity: "r1"
+        write_affinity_node_count: "2 * replicas"
+  infra2:
+    ip: 172.29.236.111
+    container_vars:
+      swift_proxy_vars:
+        read_affinity: "r2=100"
+        write_affinity: "r2"
+        write_affinity_node_count: "2 * replicas"
+  infra3:
+    ip: 172.29.236.112
+    container_vars:
+      swift_proxy_vars:
+        read_affinity: "r3=100"
+        write_affinity: "r3"
+        write_affinity_node_count: "2 * replicas"
+
+# Level: swift_hosts (required)
+swift_hosts:
+  swift01:
+    ip: 172.29.236.115
+    container_vars:
+      swift_vars:
+        zone: 0
+  swift02:
+    ip: 172.29.236.116
+    container_vars:
+      swift_vars:
+        zone: 1
+  swift03:
+    ip: 172.29.236.117
+    container_vars:
+      swift_vars:
+        zone: 2

@@ -12,8 +12,8 @@ used_ips:
   - 172.29.248.100,172.29.248.200
 
 global_overrides:
-  internal_lb_vip_address: 172.29.236.117
-  external_lb_vip_address: 192.168.100.117
+  internal_lb_vip_address: 172.29.236.102
+  external_lb_vip_address: 192.168.100.102
   tunnel_bridge: "br-vxlan"
   management_bridge: "br-mgmt"
   provider_networks:
@@ -34,13 +34,12 @@ global_overrides:
           - cinder_api
           - cinder_volume
           - nova_compute
-          # Uncomment the next line if using swift with a storage network.
-          # - swift_proxy
+          - swift_proxy
         type: "raw"
         container_bridge: "br-storage"
         container_type: "veth"
         container_interface: "eth2"
-        container_mtu: "9000"
+        container_mtu: "1500"
         ip_from_q: "storage"
     - network:
         group_binds:
@@ -48,7 +47,7 @@ global_overrides:
         container_bridge: "br-vxlan"
         container_type: "veth"
         container_interface: "eth10"
-        #container_mtu: "9000"
+        container_mtu: "1500"
         ip_from_q: "tunnel"
         type: "vxlan"
         range: "1:1000"
@@ -73,7 +72,7 @@ global_overrides:
         net_name: "flat"
 
 
-# Shared infrastructure parts
+# Level: shared-infra_hosts (required)
 shared-infra_hosts:
   controller01:
     ip: 172.29.236.110
@@ -82,78 +81,7 @@ shared-infra_hosts:
   controller03:
     ip: 172.29.236.112
 
-# OpenStack Compute infrastructure parts
-os-infra_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# Shared infrastructure parts
-shared-infra_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# OpenStack Compute infrastructure parts
-os-infra_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# OpenStack Storage infrastructure parts
-storage-infra_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# Keystone Identity infrastructure parts
-identity_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# Compute Hosts
-compute_hosts:
-  compute01:
-    ip: 172.29.236.113
-  compute02:
-    ip: 172.29.236.114
-
-# Cinder Hosts
-storage_hosts:
-  controller01:
-    ip: 172.29.236.110
-
-# Loging Host
-log_hosts:
-  controller01:
-    ip: 172.29.236.110
-
-# Neutron Hosts
-network_hosts:
-  controller01:
-    ip: 172.29.236.110
-  controller02:
-    ip: 172.29.236.111
-  controller03:
-    ip: 172.29.236.112
-
-# User defined Repository Hosts, this is an optional group
+# Level: repo-infra_hosts (required)
 repo-infra_hosts:
   controller01:
     ip: 172.29.236.110
@@ -162,7 +90,65 @@ repo-infra_hosts:
   controller03:
     ip: 172.29.236.112
 
-# haproxy_hosts:
+# Level: os-infra_hosts (required)
+os-infra_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
+# Level: identity_hosts (required)
+identity_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
+# Level: network_hosts (required)
+network_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
+# Level: compute_hosts (optional)
+compute_hosts:
+  compute01:
+    ip: 172.29.236.113
+  compute02:
+    ip: 172.29.236.114
+
+# Level: ironic-compute_hosts (optional)
+
+# Level: storage-infra_hosts (required)
+storage-infra_hosts:
+  controller01:
+    ip: 172.29.236.110
+  controller02:
+    ip: 172.29.236.111
+  controller03:
+    ip: 172.29.236.112
+
+# Level: storage_hosts (required)
+storage_hosts:
+  controller01:
+    ip: 172.29.236.110
+
+### THINK THIS NEEDS MORE SETINGS FOR LVM ###
+
+
+# Level: log_hosts (required)
+log_hosts:
+  controller02:
+    ip: 172.29.236.111
+
+# Level: haproxy_hosts (optional)
   lb01:
     ip: 172.29.236.100
    # lb02:

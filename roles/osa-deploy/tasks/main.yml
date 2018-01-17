@@ -93,6 +93,14 @@
   tags:
     - user_variables
 
+- name: Create swift.yml from template
+  template:
+    src: files/swift.yml
+    dest: /etc/openstack_deploy/conf.d/swift.yml
+    backup: yes
+  tags:
+    - swift
+
 - name: Run setup-hosts.yml
   shell: ansible-playbook setup-hosts.yml
   args:
