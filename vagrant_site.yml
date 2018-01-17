@@ -1,6 +1,5 @@
 ---
 
-### base build start ###
 - import_playbook: copy-keys.yml
 - import_playbook: data-disk.yml
 - import_playbook: swift-disks.yml
@@ -11,4 +10,4 @@
 - import_playbook: distribute-key.yml
 - import_playbook: osa-prep.yml
 - import_playbook: osa-git.yml
-### base build end ###
+- import_playbook: osa-deploy.yml
